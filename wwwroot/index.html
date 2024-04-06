@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="agileworks.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer support</title>
+</head>
+<link rel="stylesheet" type="text/css" href="agileworks.css">
+<body>
+<h2>How can we help you?</h2>
+<form method="post" asp-action="SubmitComplaint">
+  <label for="complaint_type">Select complaint type:</label>
+  <select id="complaint_type" name="complaint_type">
+    <option value="1">Issue with product</option>
+    <option value="2">Customer service problem</option>
+    <option value="3">Billing dispute</option>
+    <option value="4">Delivery problem</option>
+    <option value="5">Other</option>
+  </select>
+  <br><br>
+  <label for="complaint">Enter your complaint:</label><br>
+  <textarea id="complaint" name="complaint" rows="4" cols="50"></textarea>
+  <br><br>
+  <input type="submit" value="Submit">
+</form>
+</style>
+<body>
+  <hr>
+  <div id="Table">
+<table style="width:100%">
+  <tr>
+    <th>Description</th>
+    <th>Time</th>
+    <th>Country</th>
+</table>
+</div>
+</body>
+</html>
+
