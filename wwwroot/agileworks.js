@@ -3,10 +3,10 @@ document.addEventListener("DOMContentLoaded", function () {
     .querySelector('input[type="submit"]')
     .addEventListener("click", function (event) {
       event.preventDefault();
-      var clickCount = parseInt(localStorage.getItem("buttonClickCount")) || 0;
+      let clickCount = parseInt(localStorage.getItem("buttonClickCount")) || 0;
       clickCount++;
       localStorage.setItem("buttonClickCount", clickCount);
-      var lastButtonClickTimestamp = new Date().toISOString();
+      let lastButtonClickTimestamp = new Date().toISOString();
       localStorage.setItem(
         "lastButtonClickTimestamp",
         lastButtonClickTimestamp
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function postAppealData(complaintType, complaintText) {
-  const url = "http://localhost:5042/api/test";
+  const url = "http://localhost:5042/api/v1/appeal";
   const requestBody = {
     complaintType,
     complaintText,
@@ -38,6 +38,18 @@ function postAppealData(complaintType, complaintText) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(requestBody),
+  };
+
+  fetch(url, options)
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.error(error));
+}
+
+function getAppealData() {
+  const url = "http://localhost:5042/api/v1/appeal";
+  const options = {
+    method: "GET",
   };
 
   fetch(url, options)
