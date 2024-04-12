@@ -31,10 +31,11 @@ app.MapPost("/api/v1/appeal", (PostRequestBody requestBody) =>
         connection.Open();
 
         var command = connection.CreateCommand();
+        //https://stackoverflow.com/questions/60364847/how-to-insert-values-with-foreign-key-in-sqlite/60365480#60365480
         command.CommandText =
         @"
-            INSERT INTO agile (description, time_of_appeal, appeal_deadline, is_solved, appeal_type)
-            VALUES ($description, $timeOfAppeal, $appealDeadline, $isSolved, $appealType)
+            INSERT INTO agile (description, time_of_appeal, appeal_deadline, is_solved, appeal_type_id)
+            VALUES ($description, $timeOfAppeal, $appealDeadline, $isSolved, $appealTypeId)
         ";
 
         //siin kasuta docsi https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlparametercollection.addwithvalue?view=dotnet-plat-ext-8.0
@@ -50,7 +51,7 @@ app.MapPost("/api/v1/appeal", (PostRequestBody requestBody) =>
     return requestBody;
 });
 
-app.MapGet("/api/v1/appeal/", () =>
+app.MapGet("/api/v1/appeal", () =>
 {
     using (var connection = new SqliteConnection("Data Source=/Users/rolandsilt/desktop/AgileWorksINternship/agile.db"))
     {
@@ -83,6 +84,10 @@ app.MapGet("/api/v1/appeal/", () =>
         }
     }
 });
+
+
+
+
 
 app.Run();
 
